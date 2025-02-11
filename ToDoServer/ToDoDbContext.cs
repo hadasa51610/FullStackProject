@@ -10,6 +10,7 @@ public partial class ToDoDbContext : DbContext
     public ToDoDbContext()
     {
     }
+    
 
     public ToDoDbContext(DbContextOptions<ToDoDbContext> options)
         : base(options)
