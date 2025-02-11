@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5172/tasks';
-
-axios.interceptors.response.use(
+// axios.defaults.baseURL = 'http://localhost:5172/tasks';
+const axiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_URL_SERVER, 
+});
+axiosInstance.interceptors.response.use(
   response => { return response; },
   error => {
     console.error('Response error:', error.response ? error.response.data : error.message);
