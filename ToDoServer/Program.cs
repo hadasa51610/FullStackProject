@@ -25,15 +25,15 @@ var app = builder.Build();
 
 app.UseCors("AllowAllOrigins");
 
-// if (app.Environment.IsDevelopment())
-// {
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI(option =>
     {
         option.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
         option.RoutePrefix = string.Empty;
     });
-// }
+}
 
 app.MapGet("/tasks", async (ToDoDbContext dto) =>
 {
