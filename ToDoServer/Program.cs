@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
+
 builder.Services.AddDbContext<ToDoDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
@@ -17,13 +18,6 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
-// builder.Services.AddCors(options =>
-// {
-//     options.AddPolicy("AllowSpecificOrigin",
-//         builder => builder.WithOrigins("https://todoclient-yp8h.onrender.com") // Replace with your client URL
-//                           .AllowAnyHeader()
-//                           .AllowAnyMethod());
-// });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -31,8 +25,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 app.UseCors("AllowAllOrigins");
-// app.UseCors("AllowSpecificOrigin");
-
 
 if (app.Environment.IsDevelopment())
 {

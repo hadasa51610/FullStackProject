@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const url=process.env.REACT_APP_API_URL;
- console.log(url);
-axios.defaults.baseURL=url;
+const url = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = url;
 
 axios.interceptors.response.use(
   response => { return response; },
@@ -14,25 +13,23 @@ axios.interceptors.response.use(
 
 export default {
   getTasks: async () => {
-      const result = await axios.get(`/tasks`);
-      console.log(result.data);
-      return result.data;
+    const result = await axios.get(`/tasks`);
+    return result.data;
   },
 
   addTask: async (name) => {
-      console.log('addTask', name)
-      const result = await axios.post(`/tasks`, { id: 0, name: name, isComplete: false })
-      console.log(result.data);
-      return result.data;
+    console.log('addTask', name)
+    const result = await axios.post(`/tasks`, { id: 0, name: name, isComplete: false })
+    return result.data;
   },
 
   setCompleted: async (id, isComplete) => {
-      console.log('setCompleted', { id, isComplete })
-      await axios.put(`/tasks/${id}`, { id: id, name: "", isComplete: isComplete })
+    console.log('setCompleted', { id, isComplete })
+    await axios.put(`/tasks/${id}`, { id: id, name: "", isComplete: isComplete })
   },
 
   deleteTask: async (id) => {
-      console.log('deleteTask')
-      await axios.delete(`/tasks/${id}`, id);
+    console.log('deleteTask')
+    await axios.delete(`/tasks/${id}`, id);
   }
 };
