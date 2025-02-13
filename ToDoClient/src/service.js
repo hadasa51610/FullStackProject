@@ -15,7 +15,7 @@ axios.interceptors.response.use(
 export default {
   getTasks: async () => {
     try {
-      const result = await axios.get(``);
+      const result = await axios.get(`/tasks`);
       console.log(result.data);
       return result.data;
     } catch (e) {
@@ -26,7 +26,7 @@ export default {
   addTask: async (name) => {
     try {
       console.log('addTask', name)
-      const result = await axios.post(``, { id: 0, name: name, isComplete: false })
+      const result = await axios.post(`/tasks`, { id: 0, name: name, isComplete: false })
       console.log(result.data);
       return result.data;
     } catch (e) {
@@ -37,7 +37,7 @@ export default {
   setCompleted: async (id, isComplete) => {
     try {
       console.log('setCompleted', { id, isComplete })
-      await axios.put(`/${id}`, { id: id, name: "", isComplete: isComplete })
+      await axios.put(`/tasks/${id}`, { id: id, name: "", isComplete: isComplete })
     } catch (e) {
       console.error('There was an error!', e); throw e;
     }
@@ -46,7 +46,7 @@ export default {
   deleteTask: async (id) => {
     try {
       console.log('deleteTask')
-      await axios.delete(`/${id}`, id);
+      await axios.delete(`/tasks/${id}`, id);
     } catch (e) {
       console.error('There was an error!', e); throw e;
     }
