@@ -15,15 +15,15 @@ axios.interceptors.response.use(
 export default {
   getTasks: async () => {
       const result = await axios.get(`/tasks`);
-      console.log(result);
-      return result;
+      console.log(result.data);
+      return result.data;
   },
 
   addTask: async (name) => {
       console.log('addTask', name)
       const result = await axios.post(`/tasks`, { id: 0, name: name, isComplete: false })
-      console.log(result);
-      return result;
+      console.log(result.data);
+      return result.data;
   },
 
   setCompleted: async (id, isComplete) => {
