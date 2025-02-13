@@ -10,12 +10,19 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.Parse("8.0.41-mysql"));
 });
 
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowAllOrigins",
+//         builder => builder.AllowAnyOrigin()
+//                           .AllowAnyMethod()
+//                           .AllowAnyHeader());
+// });
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
-        builder => builder.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("https://todoclient-yp8h.onrender.com") // Replace with your client URL
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -23,7 +30,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseCors("AllowAllOrigins");
+// app.UseCors("AllowAllOrigins");
+app.UseCors("AllowSpecificOrigin");
+
 
 if (app.Environment.IsDevelopment())
 {
